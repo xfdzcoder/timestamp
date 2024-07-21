@@ -151,7 +151,7 @@
                         'text-blue-600 font-bold text-18px dark:text-white':
                           按钮停止状态
                       }"
-                      @click="复制(底部动态时间戳)"
+                      @click="clickTimestamp(底部动态时间戳)"
                     >
                       {{ 底部动态时间戳 }}
                     </span>
@@ -288,14 +288,14 @@ const formats = useStorage('formats', [
   'YYYY年MM月DD日 HH时mm分ss秒'
 ])
 const formatString = ref(formats.value[0])
-const formatChange = (value) => {
+function formatChange(value) {
   if (! formats.value.includes(value)) {
     formats.value.push(value)
     utools.dbStorage.setItem('formats', formats.value)
   }
   console.log(formats)
 }
-const delFormat = (format) => {
+function delFormat(format) {
   if (formats.value.length !== 1) {
     formats.value = formats.value.filter(f => f !== format)
     if (formatString.value === format) {
@@ -366,6 +366,12 @@ onMounted(() => {
   utoolsInit()
 })
 
+// 点击当前时间戳时
+function clickTimestamp(timestamp) {
+  // 填充时间戳转日期的输入框
+  formData.time = timestamp
+  复制(timestamp)
+}
 const 按钮停止状态 = ref(false) // 按钮状态，是否停止
 // 开始/停止按钮
 function 暂停开始按钮() {

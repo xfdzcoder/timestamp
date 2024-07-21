@@ -312,6 +312,14 @@ function 重置数据() {
   formData.time = undefined
   时间戳类型.value = 'ms'
   时区.value = 'Asia/Shanghai'
+  formats.value = [
+    'YYYY-MM-DD HH:mm:ss',
+    'ddd, D MMM YYYY HH:mm:ss Z',
+    'YYYY-MM-DDTHH:mm:ssZ',
+    'YYYY-MM-DDTHH:mm:ss',
+    'YYYY年MM月DD日 HH时mm分ss秒'
+  ]
+  utools.dbStorage.setItem('formats', formats.value)
   Message.success({ content: '已重置', duration: 1000 })
 }
 
